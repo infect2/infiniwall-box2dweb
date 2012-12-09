@@ -6,8 +6,11 @@ By this project, you will understand how physics engine can be integrated with C
 
 ## Underyling open source projects
 INFINIWALL: [github](https://github.com/cubiq/infiniwall.git)
+
 box2dweb: [codegoogle](code.google.com/p/box2dweb)
+
 fakeworker-js: [code google] (code.google.com/p/fakeworker-js)
+
 box2d-javascript-fun: [github](https://github.com/sethladd/box2d-javascript-fun/)
 
 ## Supported platforms
