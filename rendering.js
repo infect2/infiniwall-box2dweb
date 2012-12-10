@@ -2,6 +2,7 @@ var worker, world = {}, worldElement = {}, firstUpdated = false;
 var stopAnimationFlag = false;
 
 function createEntity() {
+  var cnt = PEConfig.maxObjectNum;
   $( canvasConfig.selector ).find( 'li' ).each( function( index ){
     var x, y,
         translated, translateX, translateY,
@@ -13,6 +14,11 @@ function createEntity() {
 
     if ( Math.random() < canvasConfig.hiddenRatio ) {
       animatable = false;//set visibility:hidden to exclude itself out of animating elements
+    } else {
+      cnt--;
+      if( cnt < 0 ) {
+        animatable = false;
+      }
     }
 
     scale = Math.random()*canvasConfig.maxScale;
@@ -46,7 +52,11 @@ function createEntity() {
     };
 
     if( animatable ) {
-      world[ index ] = new RectangleEntity( index, x, y, width , height);
+      if( PEConfig.useCircleEntity ) {
+        world[ index ] = new CircleEntity( index, x, y, width /* fake radius */);
+      } else {       
+        world[ index ] = new RectangleEntity( index, x, y, width , height);
+      }
     } else {
       $element.css( "opacity", 0.1 );
     }
