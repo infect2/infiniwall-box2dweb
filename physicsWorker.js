@@ -27,7 +27,7 @@ function bTest(intervalRate, adaptive, width, height) {
   this.fixDef = new b2FixtureDef;
   this.fixDef.density = 1.0;
   this.fixDef.friction = 0.5;
-  this.fixDef.restitution = 0.8;
+  this.fixDef.restitution = 0.5;
 
   this.bodyDef = new b2BodyDef;
 
@@ -36,12 +36,12 @@ function bTest(intervalRate, adaptive, width, height) {
 
   // positions the center of the object (not upper left!)
   this.bodyDef.position.x = width / 2 / SCALE;
-  this.bodyDef.position.y = (height-50) / SCALE;
+  this.bodyDef.position.y = (height-150) / SCALE;
 
   this.fixDef.shape = new b2PolygonShape;
 
   // half width, half height. eg actual height here is 1 unit
-  this.fixDef.shape.SetAsBox(((width+200) / SCALE) / 2, (10/SCALE) / 2);
+  this.fixDef.shape.SetAsBox(((width+1000) / SCALE) / 2, (10/SCALE) / 2);
   this.world.CreateBody(this.bodyDef).CreateFixture(this.fixDef);
 }
 
@@ -51,8 +51,8 @@ bTest.prototype.update = function() {
   this.lastTimestamp = now;
   this.world.Step(
          stepRate   //frame-rate
-      ,  8       //velocity iterations
-      ,  3       //position iterations
+      ,  6       //velocity iterations
+      ,  5       //position iterations
    );
   this.world.ClearForces();
   this.sendUpdate();
@@ -69,17 +69,21 @@ bTest.prototype.sendUpdate = function() {
 }
 
 bTest.prototype.setBodies = function(bodyEntities) {
-    this.bodyDef.type = b2Body.b2_dynamicBody;
-    for(var id in bodyEntities) {
-        var entity = bodyEntities[id];
-        this.fixDef.shape = new b2PolygonShape;
-        this.fixDef.shape.SetAsBox(entity.halfWidth/SCALE, entity.halfHeight/SCALE);
-        this.bodyDef.position.x = Math.ceil(entity.x/SCALE);
-        this.bodyDef.position.y = Math.ceil(entity.y/SCALE);
-        this.bodyDef.userData = entity.id;
-        this.world.CreateBody(this.bodyDef).CreateFixture(this.fixDef);
-    }
-    this.ready = true;
+  this.bodyDef.type = b2Body.b2_dynamicBody;
+  for(var id in bodyEntities) {
+      var entity = bodyEntities[id];
+      if (entity.radius) {
+          this.fixDef.shape = new b2CircleShape(entity.radius/SCALE);
+      } else {
+          this.fixDef.shape = new b2PolygonShape;
+          this.fixDef.shape.SetAsBox(entity.halfWidth/SCALE, entity.halfHeight/SCALE);
+      }
+     this.bodyDef.position.x = entity.x/SCALE;
+     this.bodyDef.position.y = entity.y/SCALE;
+     this.bodyDef.userData = entity.id;
+     this.world.CreateBody(this.bodyDef).CreateFixture(this.fixDef);
+  }
+  this.ready = true;
 }
 
 var box,
