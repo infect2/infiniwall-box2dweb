@@ -9,6 +9,10 @@
 	<script src="./jquery-1.8.0.js"></script>
 </head>
 <body>
+	<form>
+	  <input id="useWorkerThread" type="checkbox" name="useWorkerThread" checked="checked"> Use Worker Thread </input>
+	</form>
+	<div id="runButton" style="border:1px solid black; text-align:center; height:50px; background-color:gray; width:200px"> Run Benchmark </div>
 	<div id="infiniwall">
 		<ul>
 			<li></li>
@@ -42,10 +46,6 @@
 			<li></li>
 		</ul>
 	</div>
-	<form>
-	  <input id="useWorkerThread" type="checkbox" name="useWorkerThread" checked="checked"> Use Worker Thread </input>
-	</form>
-	<div id="runButton" style="border:1px solid black; text-align:center; height:50px; background-color:gray; width:100px"> Run Benchmark </div>
 <script>
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 var iw = new InfiniWall('#infiniwall');

@@ -5,13 +5,13 @@ var canvasConfig = { //benchmarking configuration
     height: 0,
     minScale: 0.5,
     maxScale: 1.2,
-    hiddenRatio: 0.6
+    hiddenRatio: 0.3
   },
   PEConfig = {//physics engine configuration
     useWokerThread: true,//don't change, it is the initial value
     physicsEngineTimeStep: 1000/60,
     useCircleEntity: true, //force to use CirCleEntity
-    maxObjectNum: 2
+    maxObjectNum: 5
   },
   animationDriver = {//benchmarking driver
     benchmarkingUnderway: false,
