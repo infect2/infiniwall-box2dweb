@@ -10,7 +10,7 @@ To see demo, load index.html, then press the button at the bottom. Those browser
 ## Underyling open source projects
 INFINIWALL: [github](https://github.com/cubiq/infiniwall.git)
 
-box2dweb: [codegoogle](code.google.com/p/box2dweb)
+box2dweb: [code google](code.google.com/p/box2dweb)
 
 fakeworker-js: [code google] (code.google.com/p/fakeworker-js)
 
